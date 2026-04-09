@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Wrapper ─── */
+.auth-wrapper {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8ecf0;
+  padding: 24px;
+}
+
+/* ─── Card ─── */
+.auth-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+  animation: fadeUp 0.35s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Logo ─── */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.auth-logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+/* ─── Title (Register only) ─── */
+.auth-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+  letter-spacing: -0.5px;
+  margin-bottom: 28px;
+}
+
+/* ─────────────────────────────────
+   LOGIN  —  plain inputs
+───────────────────────────────── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.field { position: relative; }
+
+.input-plain {
+  width: 100%;
+  background: #f5f6f8;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 15px 18px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  color: #111;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.input-plain::placeholder { color: #a0a8b5; }
+.input-plain:focus {
+  background: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.input-plain.input-error {
+  border-color: #dc2626;
+  background: #fff5f5;
+}
+.input-plain.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* ─────────────────────────────────
+   REGISTER  —  floating label inputs
+───────────────────────────────── */
+.float-wrap {
+  position: relative;
+  border: 1.5px solid #d0d5dd;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.float-wrap.focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+  background: #fff;
+}
+.float-wrap.has-error {
+  border-color: #dc2626;
+  background: #fff5f5;
+}
+.float-wrap.has-error.focused {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.10);
+}
+.float-wrap.has-success {
+  border-color: #d0d5dd;
+}
+
+.float-label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: top 0.18s, font-size 0.18s, color 0.18s;
+  background: transparent;
+  padding: 0 3px;
+}
+.float-label.lifted {
+  top: 0px;
+  font-size: 11px;
+  background: #fff;
+}
+.float-label.label-focused { color: #2563eb; }
+.float-label.label-error   { color: #dc2626; }
+
+.float-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 20px 44px 8px 14px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  color: #111;
+  border-radius: 10px;
+}
+
+/* Icon buttons inside float field */
+.field-icon-btn {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  line-height: 1;
+}
+.icon-success { color: #16a34a; pointer-events: none; }
+.icon-error   { color: #dc2626; pointer-events: none; }
+
+/* ─── Password Strength Bar ─── */
+.strength-track {
+  display: flex;
+  gap: 4px;
+  padding: 6px 14px 2px;
+}
+.strength-seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  transition: background 0.3s;
+}
+
+/* ─── Error message ─── */
+.error-msg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: #dc2626;
+  margin-top: 5px;
+  padding-left: 2px;
+}
+
+/* ─── Remember / Forgot row ─── */
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #111;
+}
+
+/* ─── Links ─── */
+.text-link {
+  font-size: 14px;
+  color: #111;
+  text-decoration: underline;
+  font-family: 'DM Sans', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.text-link:hover { color: #2563eb; }
+
+.text-link-inline {
+  color: #111;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.text-link-inline:hover { color: #2563eb; }
+
+/* ─── Agree checkbox row ─── */
+.agree-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+.agree-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #111;
+  cursor: pointer;
+}
+.agree-row label { cursor: pointer; }
+.agree-error { color: #dc2626; }
+
+/* ─── Primary Button ─── */
+.btn-primary {
+  width: 100%;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.1px;
+  margin-bottom: 24px;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  background: #1a1a1a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.btn-primary:active { transform: scale(0.99); }
+
+/* ─── Footer ─── */
+.auth-footer {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.footer-link:hover { color: #2563eb; }
+
+/* ─── Responsive ─── */
+@media (max-width: 520px) {
+  .auth-card { padding: 36px 24px; }
+  .auth-title { font-size: 24px; }
+}
