@@ -9,7 +9,7 @@
     <aside className="sidebar">
       <div className="sidebar-logo">
         <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-          <rect width="36" height="36" rx="8" fill="#4f46e5"/>
+          <rect width="36" height="36" rx="8" fill="#9b9aa1"/>
           <path d="M10 22l5-5 4 4 7-8" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           <circle cx="26" cy="12" r="2.5" fill="#fff"/>
         </svg>

@@ -7,7 +7,6 @@ import AddInternshipModal from '../components/AddInternshipModal'
 import ApplicantsTable   from '../components/ApplicantsTable'
 import '../Dashboard.css'
 
-// ── Sample Data ──
 const SAMPLE_INTERNSHIPS = [
   {
     id: 1,
