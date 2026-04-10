@@ -8,32 +8,30 @@ dotenv.config()
 
 const app = express()
 
-// ── Middleware ──
-app.use(cors({ origin: 'http://localhost:5173' }))
-app.use(express.json())
 
-// ── Routes ──
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}))
+app.use(express.json())
 app.use('/api/auth', authRoutes)
 
-// ── Health check ──
 app.get('/', (req, res) => {
-  res.json({ message: '🚀 InternBuddy API is running' })
+  res.json({ message: ' InternBuddy API is running' })
 })
 
-// ── Connect to MongoDB FIRST, then start server ──
 mongoose
   .connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 10000, // wait 10s before timeout
+    serverSelectionTimeoutMS: 10000,
   })
   .then(() => {
-    console.log('MongoDB Atlas Connected Successfully')
-    
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on http://localhost:${process.env.PORT}`)
+    console.log(' MongoDB Atlas Connected Successfully')
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(` Server running on http://localhost:${process.env.PORT || 5000}`)
     })
   })
   .catch((err) => {
     console.error(' MongoDB Connection Failed:', err.message)
-    console.error(' Check: 1) Atlas IP Whitelist  2) .env password  3) Internet connection')
+    console.error(' Fix: 1) Check Atlas IP Whitelist  2) Check .env password  3) Check internet')
     process.exit(1)
   })
