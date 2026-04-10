@@ -18,7 +18,11 @@ router.post('/register', async (req, res) => {
     if (existing)
       return res.status(400).json({ message: 'Email already registered' })
 
-    const user = await User.create({ name, email, password })
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10)
+    console.log('🔒 Password hashed successfully')
+
+    const user = await User.create({ name, email, password: hashedPassword })
     console.log('✅ User created:', user.email)
 
     res.status(201).json({
@@ -28,7 +32,7 @@ router.post('/register', async (req, res) => {
 
   } catch (err) {
     console.error('❌ Register error:', err.message)
-    res.status(500).json({ message: err.message }) // sends REAL error to frontend
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -42,14 +46,23 @@ router.post('/login', async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ message: 'All fields are required' })
 
-    const user = await User.findOne({ email })
-    if (!user)
+    // Find user
+    const user = await User.findOne({ email: email.toLowerCase().trim() })
+    if (!user) {
+      console.log('❌ No user found with email:', email)
       return res.status(400).json({ message: 'Invalid email or password' })
+    }
 
+    console.log('👤 User found:', user.email)
+
+    // Compare password
     const match = await bcrypt.compare(password, user.password)
+    console.log('🔑 Password match:', match)
+
     if (!match)
       return res.status(400).json({ message: 'Invalid email or password' })
 
+    // Generate token
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
