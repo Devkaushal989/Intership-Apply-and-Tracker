@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body
 
-    console.log('📩 Register attempt:', { name, email })
+    console.log(' Register attempt:', { name, email })
 
     if (!name || !email || !password)
       return res.status(400).json({ message: 'All fields are required' })
@@ -20,10 +20,10 @@ router.post('/register', async (req, res) => {
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
-    console.log('🔒 Password hashed successfully')
+    console.log(' Password hashed successfully')
 
     const user = await User.create({ name, email, password: hashedPassword })
-    console.log('✅ User created:', user.email)
+    console.log(' User created:', user.email)
 
     res.status(201).json({
       message: 'Account created successfully',
@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
     })
 
   } catch (err) {
-    console.error('❌ Register error:', err.message)
+    console.error(' Register error:', err.message)
     res.status(500).json({ message: err.message })
   }
 })
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
-    console.log('🔐 Login attempt:', email)
+    console.log('Login attempt:', email)
 
     if (!email || !password)
       return res.status(400).json({ message: 'All fields are required' })
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
     // Find user
     const user = await User.findOne({ email: email.toLowerCase().trim() })
     if (!user) {
-      console.log('❌ No user found with email:', email)
+      console.log(' No user found with email:', email)
       return res.status(400).json({ message: 'Invalid email or password' })
     }
 
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 
     // Compare password
     const match = await bcrypt.compare(password, user.password)
-    console.log('🔑 Password match:', match)
+    console.log(' Password match:', match)
 
     if (!match)
       return res.status(400).json({ message: 'Invalid email or password' })
@@ -69,7 +69,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     )
 
-    console.log('✅ Login successful:', email)
+    console.log(' Login successful:', email)
 
     res.json({
       message: 'Login successful',
@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     })
 
   } catch (err) {
-    console.error('❌ Login error:', err.message)
+    console.error(' Login error:', err.message)
     res.status(500).json({ message: err.message })
   }
 })
