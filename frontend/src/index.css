@@ -9,7 +9,6 @@ html, body, #root {
   width: 100%;
 }
 
-/* ── Fix Vite default that breaks full-page layouts ── */
 #root {
   max-width: 100%;
   padding: 0;

@@ -111,18 +111,15 @@ export default function Register() {
 
   const [activeTab, setActiveTab] = useState('candidate')
 
-  // Shared fields
   const [name, setName]         = useState('')
   const [email, setEmail]       = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm]   = useState('')
   const [agree, setAgree]       = useState(false)
 
-  // Org-only fields
   const [industry, setIndustry] = useState('')
   const [website, setWebsite]   = useState('')
 
-  // UI state
   const [showPwd, setShowPwd]     = useState(false)
   const [showCfm, setShowCfm]     = useState(false)
   const [errors, setErrors]       = useState({})
@@ -234,13 +231,11 @@ export default function Register() {
           ))}
         </div>
 
-        {/* API Error */}
         {apiError && <div className="api-error-banner">⚠ {apiError}</div>}
 
         <form onSubmit={handleSubmit} noValidate>
           <div className="field-group">
 
-            {/* Name */}
             <PlainInput
               placeholder={activeTab === 'organization' ? 'Company Name' : 'Full Name'}
               value={name}
@@ -248,7 +243,6 @@ export default function Register() {
               error={errors.name}
             />
 
-            {/* Email */}
             <PlainInput
               placeholder={activeTab === 'organization' ? 'Company Email' : 'Email Address'}
               type="email"
@@ -257,7 +251,6 @@ export default function Register() {
               error={errors.email}
             />
 
-            {/* Org-only fields */}
             {activeTab === 'organization' && (
               <>
                 <PlainInput
@@ -273,7 +266,6 @@ export default function Register() {
               </>
             )}
 
-            {/* Password */}
             <PlainInput
               placeholder="Password"
               value={password}
@@ -283,7 +275,6 @@ export default function Register() {
               onToggle={() => setShowPwd(v => !v)}
             />
 
-            {/* Confirm Password */}
             <PlainInput
               placeholder="Confirm Password"
               value={confirm}
@@ -295,14 +286,12 @@ export default function Register() {
 
           </div>
 
-          {/* Org one-account notice */}
           {activeTab === 'organization' && (
             <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 14, lineHeight: 1.5 }}>
               ⚠ One email = one company account. Duplicate emails are not allowed.
             </p>
           )}
 
-          {/* Agree */}
           <div className={`agree-row ${errors.agree ? 'agree-error' : ''}`}>
             <input
               type="checkbox" id="agree"

@@ -1,23 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-// ── Candidate Auth ──
 import Login    from './pages/Login'
 import Register from './pages/Register'
 
-// ── Candidate Dashboard ──
 import CandidateDashboard from './pages/CandidateDashboard'
 
-// ── Admin Dashboard ──
 import AdminDashboard from './pages/Dashboard'
 
-// ── Company Auth & Dashboard ──
 import CompanyLogin     from './pages/CompanyLogin'
 import CompanyRegister  from './pages/CompanyRegister'
 import CompanyDashboard from './pages/CompanyDashboard'
 
-// ─────────────────────────────────────────
-//  Auth Guards
-// ─────────────────────────────────────────
 const isAuth        = () => !!localStorage.getItem('token')
 const isCompanyAuth = () => !!localStorage.getItem('companyToken')
 const isAdminAuth   = () => {
@@ -49,25 +42,20 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* Default */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* ── Candidate Auth ── */}
         <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 
-        {/* ── Candidate Dashboard ── */}
         <Route path="/dashboard"
           element={<PrivateRoute><CandidateDashboard /></PrivateRoute>}
         />
 
   
-        {/* ── Company Dashboard ── */}
         <Route path="/company/dashboard"
           element={<CompanyRoute><CompanyDashboard /></CompanyRoute>}
         />
 
-        {/* ── Admin Dashboard ── */}
         <Route path="/admindashboard"
           element={<AdminRoute><AdminDashboard /></AdminRoute>}
         />
@@ -75,7 +63,6 @@ function App() {
           element={<AdminRoute><AdminDashboard /></AdminRoute>}
         />
 
-        {/* 404 */}
         <Route path="*" element={<h1 style={{ padding: 40, color: '#fff', textAlign: 'center' }}>404 — Page Not Found</h1>} />
 
       </Routes>
