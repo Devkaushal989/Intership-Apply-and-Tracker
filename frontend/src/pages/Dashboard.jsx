@@ -400,9 +400,6 @@ function OrganizationsPage({ companies, internships, applicants, search }) {
   )
 }
 
-// ─────────────────────────────────────────────
-//  CANDIDATES PAGE
-// ─────────────────────────────────────────────
 function CandidatesPage({ candidates, applicants, search }) {
   const filtered = candidates.filter(c =>
     !search ||
